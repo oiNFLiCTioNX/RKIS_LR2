@@ -46,31 +46,31 @@ class Player:
               combat_cycle(self, enemy)
               break
      elif game_map[new_y][new_x] == '!':
-            if int(input("Вы подошли к жителю деревни. Выберите действие: 1 - взять задание, 2 - уйти: ")) == 1:
+            if input("Вы подошли к жителю деревни. Выберите действие: 1 - взять задание, 2 - уйти: ") == '1':
                 quest_acquire(quests)
                 self.x = new_x
                 self.y = new_y
      elif game_map[new_y][new_x] == 'W':
-            if int(input("Вы подошли к колодцу. Выберите действие: 1 - испить водицы, 2 - уйти: ")) == 1:
+            if (input("Вы подошли к колодцу. Выберите действие: 1 - испить водицы, 2 - уйти: ")) == '1':
              w_health_restored = int(self.max_health * 0.25)
              w_stamina_restored = int(self.max_stamina * 0.25)
              print(f"{self.name} утолил жажду и восстановил {w_health_restored} здоровья и {w_stamina_restored} выносливости.")
              self.health = min(self.health + w_health_restored, self.max_health)
              self.stamina = min(self.stamina + w_stamina_restored, self.max_stamina)
      elif game_map[new_y][new_x] == 'H':
-            if int(input("Вы подошли к хижине. Выберите действие: 1 - войти, 2 - уйти: ")) == 1:
+            if input("Вы подошли к хижине. Выберите действие: 1 - войти, 2 - уйти: ") == '1':
              print("Закрыто!")
      elif game_map[new_y][new_x] == 'T':
-            if int(input("Вы подошли к дереву. Выберите действие: 1 - осмотреть, 2 - уйти: ")) == 1:
+            if input("Вы подошли к дереву. Выберите действие: 1 - осмотреть, 2 - уйти: ") == '1':
              print("Перед вами стоит величественная сосна.")
      elif game_map[new_y][new_x] == 'P':
-            if int(input("Вы подошли к себе. Выберите действие: 1 - поговорить, 2 - уйти: ")) == 1:
+            if input("Вы подошли к себе. Выберите действие: 1 - поговорить, 2 - уйти: ") == '1':
              self.x = new_x
              self.y = new_y
              print(f"Ах, это же ты, {self.name}! Постой, кажется ты не должен был меня видеть..")
              print("\x1B[3m ВЫ БЫЛИ ПОГЛОЩЕНЫ СВОЕЙ КОПИЕЙ \x1B[0m")
      elif game_map[new_y][new_x] == 'H!':
-            if int(input("Вы подошли к хижине с подвалом. Выберите действие: 1 - войти в подвал, 2 - уйти: ")) == 1:
+            if input("Вы подошли к хижине с подвалом. Выберите действие: 1 - войти в подвал, 2 - уйти: ") == '1':
                 if quests == [True, True, True]:
                  self.x = 1
                  self.y = 1
@@ -78,7 +78,7 @@ class Player:
                 else:
                  print("Вы еще не взяли все задания!")
      elif game_map[new_y][new_x] == '[]':
-            if int(input("Вы нашли выход. Выберите действие: 1 - выйти к озеру, 2 - вернуться: ")) == 1:
+            if input("Вы нашли выход. Выберите действие: 1 - выйти к озеру, 2 - вернуться: ") == '1':
                 global q1_rat_count
                 if q1_rat_count >= q1_rat_task:
                     quests_done[0] = True
@@ -89,9 +89,7 @@ class Player:
      elif game_map[new_y][new_x] == 'R':
             self.x = new_x
             self.y = new_y
-            if int(input("Вы подошли к крысе. Выберите действие: 1 - убить, 2 - пощадить: ")) == 1:
-               # global quests_done
-               # global q1_rat_count
+            if input("Вы подошли к крысе. Выберите действие: 1 - убить, 2 - пощадить: ") == '1':
                 q1_rat_count += 1
                 if random.randint(1,2) == 1:
                     print(f"Вы с лёгкостью давите крысу! Осталось по заданию: {q1_rat_task - q1_rat_count}.")
@@ -107,14 +105,14 @@ class Player:
             else:
                 print(f"Крыса убегает с противным писком! Осталось по заданию: {q1_rat_task - q1_rat_count}.")
      elif game_map[new_y][new_x] == 'O':
-            if int(input("Вы подошли к воде. Выберите действие: 1 - умыться, 2 - вернуться: ")) == 1:
+            if input("Вы подошли к воде. Выберите действие: 1 - умыться, 2 - вернуться: ") == '1':
                 w_health_restored = int(self.max_health * 0.25)
                 w_stamina_restored = int(self.max_stamina * 0.25)
                 print(f"{self.name} утолил жажду и восстановил {w_health_restored} здоровья и {w_stamina_restored} выносливости.")
                 self.health = min(self.health + w_health_restored, self.max_health)
                 self.stamina = min(self.stamina + w_stamina_restored, self.max_stamina)
      elif game_map[new_y][new_x] == 'F':
-            if int(input("Вы нашли травы по заданию 2. Выберите действие: 1 - собрать, 2 - вернуться: ")) == 1:
+            if input("Вы нашли травы по заданию 2. Выберите действие: 1 - собрать, 2 - вернуться: ") == '1':
                 self.x = new_x
                 self.y = new_y
                 global q2_herb_count
@@ -125,8 +123,7 @@ class Player:
                   combat_cycle(self, enemies[-1])
                 else: fake_random += 1
      elif game_map[new_y][new_x] == '>':
-            if int(input("Вы нашли проход в лес. Выберите действие: 1 - двигаться дальше, 2 - вернуться: ")) == 1:
-                #global q2_herb_count
+            if input("Вы нашли проход в лес. Выберите действие: 1 - двигаться дальше, 2 - вернуться: ") == '1':
                 if q2_herb_count >= q2_herb_task:
                     quests_done[1] = True
                 clear_player_from_map(player, game_map)
@@ -135,7 +132,7 @@ class Player:
                 self.x = 1
                 self.y = 6
      elif game_map[new_y][new_x] == '^':
-            if int(input("Вы нашли выход из леса. Выберите действие: 1 - выйти и завершить игру, 2 - вернуться: ")) == 1:
+            if input("Вы нашли выход из леса. Выберите действие: 1 - выйти и завершить игру, 2 - вернуться: ") == '1':
                 global q3_kill_count
                 if q3_kill_count >= q3_kill_task:
                     quests_done[2] = True
@@ -149,9 +146,11 @@ class Player:
                                 / _  ___  _ \\
                                (_/_(/___\\)_\\)
                                                """)
+                    endwait = input("Введите любой символ...")
                     quit()
                 else:
                     print("Вы выжили, но не выполнили все задания! Плохая концовка!")
+                    endwait = input("Введите любой символ...")
                     quit()
 
      else:
